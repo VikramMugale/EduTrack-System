@@ -1,0 +1,19 @@
+
+    .marksheet-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa;
+    }
+    .subject-row {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .subject-row:last-child {
+        border-bottom: none;
+    }
+    .total-row {
+        font-weight: bold;
+    }

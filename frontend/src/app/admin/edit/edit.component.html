@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Marks</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">Edit Marks</h2>
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="form-group">
+        <label for="subject1">Math</label>
+        <input 
+          type="number" 
+          class="form-control" 
+          id="subject1" 
+          placeholder="Enter marks for Math" 
+          formControlName="math" 
+          required 
+          min="0" 
+          max="100">
+        <div *ngIf="formData.get('math')?.invalid && formData.get('math')?.touched" class="text-danger">
+          <small *ngIf="formData.get('math')?.errors?.['required']">Math marks are required.</small>
+          <small *ngIf="formData.get('math')?.errors?.['min'] || formData.get('math')?.errors?.['max']">
+            Math marks must be between 0 and 100.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject2">English</label>
+        <input 
+          type="number" 
+          class="form-control" 
+          id="subject2" 
+          placeholder="Enter marks for English" 
+          formControlName="english" 
+          required 
+          min="0" 
+          max="100">
+        <div *ngIf="formData.get('english')?.invalid && formData.get('english')?.touched" class="text-danger">
+          <small *ngIf="formData.get('english')?.errors?.['required']">English marks are required.</small>
+          <small *ngIf="formData.get('english')?.errors?.['min'] || formData.get('english')?.errors?.['max']">
+            English marks must be between 0 and 100.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject3">Science</label>
+        <input 
+          type="number" 
+          class="form-control" 
+          id="subject3" 
+          placeholder="Enter marks for Science" 
+          formControlName="science" 
+          required 
+          min="0" 
+          max="100">
+        <div *ngIf="formData.get('science')?.invalid && formData.get('science')?.touched" class="text-danger">
+          <small *ngIf="formData.get('science')?.errors?.['required']">Science marks are required.</small>
+          <small *ngIf="formData.get('science')?.errors?.['min'] || formData.get('science')?.errors?.['max']">
+            Science marks must be between 0 and 100.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject4">History</label>
+        <input 
+          type="number" 
+          class="form-control" 
+          id="subject4" 
+          placeholder="Enter marks for History" 
+          formControlName="history" 
+          required 
+          min="0" 
+          max="100">
+        <div *ngIf="formData.get('history')?.invalid && formData.get('history')?.touched" class="text-danger">
+          <small *ngIf="formData.get('history')?.errors?.['required']">History marks are required.</small>
+          <small *ngIf="formData.get('history')?.errors?.['min'] || formData.get('history')?.errors?.['max']">
+            History marks must be between 0 and 100.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject5">Geography</label>
+        <input 
+          type="number" 
+          class="form-control" 
+          id="subject5" 
+          placeholder="Enter marks for Geography" 
+          formControlName="geography" 
+          required 
+          min="0" 
+          max="100">
+        <div *ngIf="formData.get('geography')?.invalid && formData.get('geography')?.touched" class="text-danger">
+          <small *ngIf="formData.get('geography')?.errors?.['required']">Geography marks are required.</small>
+          <small *ngIf="formData.get('geography')?.errors?.['min'] || formData.get('geography')?.errors?.['max']">
+            Geography marks must be between 0 and 100.
+          </small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="formData.invalid">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

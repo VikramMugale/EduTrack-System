@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      Edit Student Details
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            class="form-control" 
+            formControlName="name" 
+            placeholder="Enter name" 
+            required>
+          <div *ngIf="formData.get('name')?.invalid && formData.get('name')?.touched" class="text-danger">
+            <small *ngIf="formData.get('name')?.errors?.['required']">Name is required.</small>
+            <small *ngIf="formData.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <textarea 
+            id="address" 
+            class="form-control" 
+            formControlName="address" 
+            rows="3" 
+            placeholder="Enter address" 
+            required>
+          </textarea>
+          <div *ngIf="formData.get('address')?.invalid && formData.get('address')?.touched" class="text-danger">
+            <small *ngIf="formData.get('address')?.errors?.['required']">Address is required.</small>
+            <small *ngIf="formData.get('address')?.errors?.['minlength']">Address must be at least 10 characters long.</small>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Edit</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passkey Form</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="text-center mb-4">Enter Passkey</h2>
+        <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="passkey">Passkey</label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="passkey" 
+                    formControlName="passkey" 
+                    placeholder="Enter passkey" 
+                    required>
+                <div *ngIf="formData.get('passkey')?.invalid && formData.get('passkey')?.touched" class="text-danger">
+                    <small *ngIf="formData.get('passkey')?.errors?.['required']">Please enter a valid passkey.</small>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3" [disabled]="formData.invalid">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet</title>
+</head>
+<body>
+    <div class="marksheet-container">
+        <h3 class="text-center">Marksheet</h3>
+        <div class="row subject-row">
+            <div class="col">Math</div>
+            <div class="col text-right">{{marks.math}}</div>
+        </div>
+        <div class="row subject-row">
+            <div class="col">English</div>
+            <div class="col text-right">{{marks.english}}</div>
+        </div>
+        <div class="row subject-row">
+            <div class="col">History</div>
+            <div class="col text-right">{{marks.history}}</div>
+        </div>
+        <div class="row subject-row">
+            <div class="col">Geography</div>
+            <div class="col text-right">{{marks.geography}}</div>
+        </div>
+        <div class="row subject-row">
+            <div class="col">Science</div>
+            <div class="col text-right">{{marks.science}}</div>
+        </div>
+        <div class="row total-row">
+            <div class="col">Total Marks</div>
+            <div class="col text-right">{{total}}</div>
+        </div>
+        <div class="row total-row">
+            <div class="col">Percentage</div>
+            <div class="col text-right">{{percentage}}%</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<div class="container" [ngClass]="{ 'blurred': showMarks }">
+  <div class="dashboard-header">
+    <h2>Student Dashboard</h2>
+    <p>Welcome, <strong>{{ student.name }}</strong>! You can view and edit your details below.</p>
+  </div>
+  
+  <div class="dashboard-container">
+    <div class="student-details">
+      <h4>Student Information</h4>
+      <div class="student-info">
+        <strong>Name:</strong> {{ student.name }} 
+      </div>
+      <div class="student-info">
+        <strong>Email:</strong> {{ student.email }} 
+      </div>
+      <div class="student-info">
+        <strong>Class:</strong> {{ student.class }} 
+      </div>
+      <div class="student-info">
+        <strong>Address:</strong> {{ student.address }} 
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button type="button" class="btn btn-outline-primary me-md-2" (click)="edit()">Edit profile</button>
+      <button type="button" class="btn btn-outline-primary" (click)="marks()">See marks</button>
+    </div>
+    <button type="button" class="btn btn-primary btn-block" (click)="logout()">Logout</button>
+  </div>
+</div>
+
+<!-- Modal-like display for MarksComponent with blur effect -->
+<div *ngIf="showMarks" class="modal-background">
+  <div class="modal-content">
+    <router-outlet></router-outlet> <!-- MarksComponent content will appear here -->
+    <button class="btn btn-secondary mt-3" (click)="closeMarks()">Close</button>
+  </div>
+</div>
+
+<div *ngIf="editprofile" class="modal-background">
+  <div class="modal-content">
+    <router-outlet></router-outlet>
+    <button class="btn btn-secondary mt-3" (click)="closeedit()">Close</button>
+  </div>
+</div>

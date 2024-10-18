@@ -1,0 +1,54 @@
+<!-- admindash.component.html -->
+<app-navbar></app-navbar>
+
+<div  [ngClass]="{ 'blurred': showEdit }">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Math</th>
+        <th scope="col">English</th>
+        <th scope="col">Science</th>
+        <th scope="col">History</th>
+        <th scope="col">Geography</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider" *ngFor="let value of data">
+      <tr>
+        <td>{{ value.name }}</td>
+        <td>{{ value.email }}</td>
+        <td>{{ value.address }}</td>
+        <td>{{ value.math }}</td>
+        <td>{{ value.english }}</td>
+        <td>{{ value.science }}</td>
+        <td>{{ value.history }}</td>
+        <td>{{ value.geography }}</td>
+        <td><button type="button" class="btn btn-primary" (click)="onEdit(value.id)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="onDelete(value.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal-like display for EditComponent with blur effect -->
+<div *ngIf="showEdit" class="modal-background">
+  <div class="modal-content">
+    <router-outlet></router-outlet> <!-- EditComponent content will appear here -->
+    <button class="btn btn-secondary mt-3" (click)="closeEdit()">Close</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
