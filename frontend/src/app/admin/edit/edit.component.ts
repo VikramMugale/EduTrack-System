@@ -26,10 +26,10 @@ export class EditComponent implements OnInit {
   onSubmit() {
     if (this.formData.valid) {
       this.data = this.formData.value;
-      let id = localStorage.getItem('id');
+      let id = localStorage.getItem('stuid');
       this.obj.edit(this.data, id).subscribe((res) => {
         if (res.message === 'Marks updated successfully') {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['adashboard']);
         }
       });
     } else {

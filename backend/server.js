@@ -24,20 +24,59 @@ app.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     try {
-        let q = "INSERT INTO student (id, name, email, address, class, password) VALUES (?, ?, ?, ?, ?, ?)";
-        let post = [
-            faker.string.uuid(),
-            name,
-            email,
-            address,
-            classs,
-            hashedPassword
-        ];
+        // Begin a transaction to ensure consistency
+        connection.beginTransaction(async (transactionErr) => {
+            if (transactionErr) throw transactionErr;
 
-        connection.query(q, post, (err, result) => {
-            if (err) throw err;
-            console.log(result);
-            res.status(200).json({ message: "Student registered successfully" });
+            // Generate a unique ID for the student
+            const studentId = faker.string.uuid();
+
+            // Insert into the student table
+            let studentQuery =
+                "INSERT INTO student (id, name, email, address, class, password) VALUES (?, ?, ?, ?, ?, ?)";
+            let studentValues = [
+                studentId,
+                name,
+                email,
+                address,
+                classs,
+                hashedPassword,
+            ];
+
+            connection.query(studentQuery, studentValues, (err, studentResult) => {
+                if (err) {
+                    return connection.rollback(() => {
+                        throw err;
+                    });
+                }
+
+                // Insert into the marks table with default values
+                let marksQuery =
+                    "INSERT INTO marks (student_id, math, science, english, history, geography) VALUES (?, 0, 0, 0, 0, 0)";
+                let marksValues = [studentId];
+
+                connection.query(marksQuery, marksValues, (err, marksResult) => {
+                    if (err) {
+                        return connection.rollback(() => {
+                            throw err;
+                        });
+                    }
+
+                    // Commit the transaction
+                    connection.commit((commitErr) => {
+                        if (commitErr) {
+                            return connection.rollback(() => {
+                                throw commitErr;
+                            });
+                        }
+
+                        console.log(studentResult, marksResult);
+                        res
+                            .status(200)
+                            .json({ message: "Student registered successfully" });
+                    });
+                });
+            });
         });
     } catch (err) {
         console.log(err);
@@ -174,6 +213,7 @@ app.get("/:id/marks", (req, res) => {
 app.put("/admin/:id/edit", async (req, res) => {
     const { id } = req.params;
     const { math, english, science, history, geography } = req.body;
+
     const q = `UPDATE marks SET math = ?, english = ?, science = ?, history = ?, geography = ? WHERE student_id = ?`;
 
     try {
